@@ -1,0 +1,95 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='790' viewBox='0 0 1200 790'><defs><marker id='ah' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='8' markerHeight='8' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#333'/></marker></defs><rect width='1200' height='790' fill='white'/><text x='600' y='22' font-size='17' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>SJ16 datapath: 16-bit CPU, 8 registers, 256-byte memory</text>
+<rect x='30' y='60' width='210' height='36' rx='5' fill='#dfe8f5' stroke='#335' stroke-width='1.6'/>
+<text x='135.0' y='82.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>MEMORY  256 bytes</text>
+<rect x='30' y='96' width='210' height='210' rx='5' fill='#eaf3ea' stroke='#335' stroke-width='1.6'/>
+<text x='135.0' y='196.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>CODE  0x00-0x2F</text>
+<text x='135.0' y='214.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>24 instructions</text>
+<rect x='30' y='306' width='210' height='54' rx='5' fill='#fdf1dc' stroke='#335' stroke-width='1.6'/>
+<text x='135.0' y='328.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>DATA  0x30-0x37</text>
+<text x='135.0' y='346.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>variables, result</text>
+<rect x='30' y='360' width='210' height='54' rx='5' fill='#fdf1dc' stroke='#335' stroke-width='1.6'/>
+<text x='135.0' y='382.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>TAG  0x38-0x3F</text>
+<text x='135.0' y='400.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ASCII text</text>
+<rect x='30' y='414' width='210' height='290' rx='5' fill='#f3e8f5' stroke='#335' stroke-width='1.6'/>
+<text x='135.0' y='545.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>STACK  0x40-0xFF</text>
+<text x='135.0' y='563.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>grows down from 0x100</text>
+<text x='135.0' y='581.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>(not printed in trace)</text>
+<rect x='24' y='96' width='222' height='318' rx='5' fill='none' stroke='#c33' stroke-width='1.6' stroke-dasharray='6 4'/>
+<text x='135' y='735' font-size='12' text-anchor='middle' fill='#c33' font-family='Arial, Helvetica, sans-serif'>red dashed = trace window 0x00-0x3F</text>
+<text x='135' y='752' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>big-endian words, even addresses only</text>
+<rect x='300' y='60' width='110' height='40' rx='5' fill='#dfe8f5' stroke='#335' stroke-width='1.6'/>
+<text x='355.0' y='84.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>PC</text>
+<rect x='300' y='150' width='110' height='40' rx='5' fill='#dfe8f5' stroke='#335' stroke-width='1.6'/>
+<text x='355.0' y='174.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>IR  16 bits</text>
+<rect x='300' y='230' width='200' height='100' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='400.0' y='257.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>DECODE</text>
+<text x='400.0' y='275.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>op = ir[15:12]  rd = ir[11:9]</text>
+<text x='400.0' y='293.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>rs1 = ir[8:6]  rs2 = ir[5:3]</text>
+<text x='400.0' y='311.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>imm6 = ir[5:0]  imm9 = ir[8:0]</text>
+<polyline points='300,80 240,80' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='270' y='72' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>PC</text>
+<polyline points='240,170 300,170' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='270' y='162' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>fetch</text>
+<polyline points='355,190 355,230' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<rect x='450' y='60' width='150' height='56' rx='5' fill='#fff4d6' stroke='#335' stroke-width='1.6'/>
+<text x='525.0' y='83.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>NEXT-PC MUX</text>
+<text x='525.0' y='101.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>PC+2 | addr9 | RET</text>
+<polyline points='410,80 450,80' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='525,60 525,50 355,50 355,60' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='440' y='42' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>next PC</text>
+<rect x='580' y='190' width='200' height='28' rx='5' fill='#dfe8f5' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='208.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>REGISTERS  8 x 16 bit</text>
+<rect x='580' y='218' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='235.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R0  always 0</text>
+<rect x='580' y='244' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='261.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R1  return value</text>
+<rect x='580' y='270' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='287.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R2  scratch</text>
+<rect x='580' y='296' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='313.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R3  scratch</text>
+<rect x='580' y='322' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='339.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R4  scratch</text>
+<rect x='580' y='348' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='365.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R5  scratch</text>
+<rect x='580' y='374' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='391.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R6  FP (software)</text>
+<rect x='580' y='400' width='200' height='26' rx='5' fill='#f7f9fd' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='417.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>R7  SP (CPU checks)</text>
+<polyline points='500,270 580,270' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='540' y='262' font-size='11' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>rs1 rs2 rd</text>
+<rect x='850' y='230' width='190' height='100' rx='5' fill='#e6f2f2' stroke='#335' stroke-width='1.6'/>
+<text x='945.0' y='257.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>ALU</text>
+<text x='945.0' y='275.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ADD SUB MUL AND</text>
+<text x='945.0' y='293.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ADDI CMP</text>
+<text x='945.0' y='311.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>A = Rs1   B = Rs2 | imm6</text>
+<polyline points='780,250 850,250' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='815' y='243' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>A</text>
+<polyline points='780,300 850,300' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='815' y='293' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>B</text>
+<rect x='850' y='380' width='190' height='40' rx='5' fill='#fdf1dc' stroke='#335' stroke-width='1.6'/>
+<text x='945.0' y='404.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>FLAGS  Z  C</text>
+<polyline points='945,330 945,380' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='965' y='360' font-size='12' text-anchor='start' fill='#111' font-family='Arial, Helvetica, sans-serif'>Z, C</text>
+<rect x='850' y='470' width='190' height='64' rx='5' fill='#fff4d6' stroke='#335' stroke-width='1.6'/>
+<text x='945.0' y='488.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>WRITE-BACK MUX</text>
+<text x='945.0' y='506.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ALU value | memory (LD)</text>
+<text x='945.0' y='524.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>imm9 (LDI)</text>
+<polyline points='1040,280 1075,280 1075,502 1040,502' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='1080' y='400' font-size='12' text-anchor='start' fill='#111' font-family='Arial, Helvetica, sans-serif'>value</text>
+<polyline points='850,490 720,490 720,426' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='785' y='482' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>write Rd</text>
+<polyline points='400,330 400,560 945,560 945,534' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='405' y='552' font-size='12' text-anchor='start' fill='#111' font-family='Arial, Helvetica, sans-serif'>imm9 (LDI)</text>
+<rect x='580' y='600' width='200' height='50' rx='5' fill='#e6f2f2' stroke='#335' stroke-width='1.6'/>
+<text x='680.0' y='620.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>ADDRESS ADDER</text>
+<text x='680.0' y='638.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>Rs1 + imm6  (LD, ST)</text>
+<polyline points='580,625 240,625' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='410' y='617' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>address;  ST data = Rd</text>
+<polyline points='240,672 945,672 945,534' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='600' y='664' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>memory data (LD)</text>
+<polyline points='640,426 640,600' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)' stroke-dasharray='5 4'/>
+<text x='645' y='535' font-size='12' text-anchor='start' fill='#111' font-family='Arial, Helvetica, sans-serif'>Rs1</text>
+<rect x='300' y='692' width='520' height='86' rx='5' fill='#fbe9e9' stroke='#335' stroke-width='1.6'/>
+<text x='560.0' y='722.0' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>CHECKS  (a fault changes nothing)</text>
+<text x='560.0' y='739.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>PC even and inside code; reserved bits 0; jump / call / return target inside code</text>
+<text x='560.0' y='756.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ST only into data, heap or live stack;  every write to R7: odd, &gt; top, &lt; limit</text></svg>

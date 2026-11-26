@@ -1,0 +1,78 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1120' height='900' viewBox='0 0 1120 900'><defs><marker id='ah' viewBox='0 0 10 10' refX='9' refY='5' markerWidth='8' markerHeight='8' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#333'/></marker></defs><rect width='1120' height='900' fill='white'/><text x='560' y='30' font-size='18' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>SJ16 instruction cycle (one pass of cpu_step)</text>
+<rect x='435' y='50' width='300' height='70' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='585.0' y='71.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>1  FETCH</text>
+<text x='585.0' y='89.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>PC even and inside code?</text>
+<text x='585.0' y='107.33333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>IR = mem16[PC]    next PC = PC + 2</text>
+<rect x='435' y='160' width='300' height='70' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='585.0' y='181.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>2  DECODE</text>
+<text x='585.0' y='199.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>op  rd  rs1  rs2  imm6  imm9</text>
+<text x='585.0' y='217.33333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>reserved bits must be 0</text>
+<rect x='435' y='270' width='300' height='50' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='585.0' y='290.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>3  EXECUTE</text>
+<text x='585.0' y='308.3333333333333' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>decide the changes, change nothing yet</text>
+<polyline points='585,120 585,160' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='585,230 585,270' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<rect x='190' y='350' width='150' height='90' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='265.0' y='373.5' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>ALU</text>
+<text x='265.0' y='390.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ADD SUB MUL AND</text>
+<text x='265.0' y='407.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>ADDI CMP</text>
+<text x='265.0' y='424.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>value, Z, C</text>
+<polyline points='585,320 265,350' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='265,440 265,462' fill='none' stroke='#333' stroke-width='1.8'/>
+<rect x='350' y='350' width='150' height='90' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='425.0' y='373.5' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>MEMORY</text>
+<text x='425.0' y='390.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>LD   ST</text>
+<text x='425.0' y='407.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>addr = Rs1 + imm6</text>
+<text x='425.0' y='424.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>even, at most 0xFE</text>
+<polyline points='585,320 425,350' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='425,440 425,462' fill='none' stroke='#333' stroke-width='1.8'/>
+<rect x='510' y='350' width='150' height='90' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='585.0' y='382.0' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>LDI</text>
+<text x='585.0' y='399.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>Rd = imm9</text>
+<text x='585.0' y='416.0' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>(0 to 511)</text>
+<polyline points='585,320 585,350' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='585,440 585,462' fill='none' stroke='#333' stroke-width='1.8'/>
+<rect x='670' y='350' width='150' height='90' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='745.0' y='373.5' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>CONTROL</text>
+<text x='745.0' y='390.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>JMP JZ JNZ JC</text>
+<text x='745.0' y='407.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>CALL  RET</text>
+<text x='745.0' y='424.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>next PC, SP -/+ 2</text>
+<polyline points='585,320 745,350' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='745,440 745,462' fill='none' stroke='#333' stroke-width='1.8'/>
+<rect x='830' y='350' width='150' height='90' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='905.0' y='390.5' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>HLT</text>
+<text x='905.0' y='407.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>stop</text>
+<polyline points='585,320 905,350' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polyline points='905,440 905,462' fill='none' stroke='#333' stroke-width='1.8'/>
+<polyline points='265,462 905,462' fill='none' stroke='#333' stroke-width='1.8'/>
+<polyline points='585,462 585,490' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polygon points='585,490 735,530 585,570 435,530' fill='#fff4d6' stroke='#335' stroke-width='1.6'/>
+<text x='585' y='525.5' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>4  CHECK</text>
+<text x='585' y='542.5' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>any fault?</text>
+<polyline points='735,530 790,530' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='762' y='522' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>yes</text>
+<rect x='790' y='495' width='300' height='70' rx='5' fill='#fbe9e9' stroke='#335' stroke-width='1.6'/>
+<text x='940.0' y='516.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>FAULT: stop</text>
+<text x='940.0' y='534.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>FAULT at 0xNN: reason</text>
+<text x='940.0' y='552.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>registers, flags, memory unchanged</text>
+<polyline points='585,570 585,600' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='599' y='590' font-size='12' text-anchor='start' fill='#111' font-family='Arial, Helvetica, sans-serif'>no</text>
+<rect x='435' y='600' width='300' height='90' rx='5' fill='#eaf3ea' stroke='#335' stroke-width='1.6'/>
+<text x='585.0' y='622.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>5  COMMIT</text>
+<text x='585.0' y='640.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>memory write (ST, CALL)</text>
+<text x='585.0' y='658.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>Rd or SP, flags Z C, IR</text>
+<text x='585.0' y='676.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>PC = next PC</text>
+<polyline points='585,690 585,720' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<rect x='435' y='720' width='300' height='50' rx='5' fill='#eef3fb' stroke='#335' stroke-width='1.6'/>
+<text x='585.0' y='740.5' font-size='12' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>6  TRACE</text>
+<text x='585.0' y='757.5' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>print step, registers, memory (binary + ASCII)</text>
+<polyline points='585,770 585,790' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<polygon points='585,790 735,830 585,870 435,830' fill='#fff4d6' stroke='#335' stroke-width='1.6'/>
+<text x='585' y='834.0' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>HLT or 1000 steps?</text>
+<polyline points='735,830 790,830' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='762' y='822' font-size='12' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>yes</text>
+<rect x='790' y='800' width='300' height='60' rx='5' fill='#eaf3ea' stroke='#335' stroke-width='1.6'/>
+<text x='940.0' y='825.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-weight='bold' font-family='Arial, Helvetica, sans-serif'>STOP</text>
+<text x='940.0' y='843.3333333333334' font-size='13' text-anchor='middle' fill='#111' font-family='Arial, Helvetica, sans-serif'>RESULT: value   STEPS: n</text>
+<polyline points='435,830 120,830 120,85 435,85' fill='none' stroke='#333' stroke-width='1.8' marker-end='url(#ah)'/>
+<text x='128' y='480' font-size='12' text-anchor='start' fill='#111' transform='rotate(-90 128 480)' font-family='Arial, Helvetica, sans-serif'>no: next instruction</text></svg>
