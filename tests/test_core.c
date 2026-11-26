@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "util.h"
 #include "memory.h"
+#include "alu.h"
 
 static int failures = 0;   /* number of failed checks */
 static int checks = 0;     /* number of checks run */
@@ -95,11 +96,45 @@ static void test_memory(void)
     expect(m.byte[0x31] == 0x34 && m.byte[0x00] == 0, "failed write changes nothing");
 }
 
+/* Checks one ALU result: value, Z and C. */
+static void expect_alu(const char *name, Opcode op, u16 a, u16 b, u16 value, int z, int c)
+{
+    AluOut r = alu_exec(op, a, b);
+    expect(r.value == value && r.z == z && r.c == c, name);
+}
+
+/* Tests every ALU operation, including flag edge cases. */
+static void test_alu(void)
+{
+    expect_alu("ADD 0xFFFF,1",      OP_ADD, 0xFFFF, 1,      0x0000, 1, 1);
+    expect_alu("ADD 2,3",           OP_ADD, 2, 3,           0x0005, 0, 0);
+    expect_alu("ADD 0x8000,0x8000", OP_ADD, 0x8000, 0x8000, 0x0000, 1, 1);
+    expect_alu("ADD 0,0",           OP_ADD, 0, 0,           0x0000, 1, 0);
+    expect_alu("SUB 1,2",           OP_SUB, 1, 2,           0xFFFF, 0, 1);
+    expect_alu("SUB 5,5",           OP_SUB, 5, 5,           0x0000, 1, 0);
+    expect_alu("SUB 0,1",           OP_SUB, 0, 1,           0xFFFF, 0, 1);
+    expect_alu("SUB 9,4",           OP_SUB, 9, 4,           0x0005, 0, 0);
+    expect_alu("CMP 5,5",           OP_CMP, 5, 5,           0x0000, 1, 0);
+    expect_alu("CMP 2,5",           OP_CMP, 2, 5,           0xFFFD, 0, 1);
+    expect_alu("CMP 5,2",           OP_CMP, 5, 2,           0x0003, 0, 0);
+    expect_alu("MUL 5040,8",        OP_MUL, 5040, 8,        40320,  0, 0);
+    expect_alu("MUL 0xFFFF,0xFFFF", OP_MUL, 0xFFFF, 0xFFFF, 0x0001, 0, 1);
+    expect_alu("MUL 0,7",           OP_MUL, 0, 7,           0x0000, 1, 0);
+    expect_alu("MUL 256,256",       OP_MUL, 256, 256,       0x0000, 1, 1);
+    expect_alu("AND F0F0,0F0F",     OP_AND, 0xF0F0, 0x0F0F, 0x0000, 1, 0);
+    expect_alu("AND 00FF,0F0F",     OP_AND, 0x00FF, 0x0F0F, 0x000F, 0, 0);
+    expect_alu("ADDI 8,-1",         OP_ADDI, 8, 0xFFFF,     0x0007, 0, 1);
+    expect_alu("ADDI 0,-32",        OP_ADDI, 0, 0xFFE0,     0xFFE0, 0, 0);
+    expect_alu("ADDI 5,31",         OP_ADDI, 5, 31,         0x0024, 0, 0);
+    expect_alu("ADDI 1,-1",         OP_ADDI, 1, 0xFFFF,     0x0000, 1, 1);
+}
+
 /* Runs all tests and returns 1 if any failed. */
 int main(void)
 {
     test_util();
     test_memory();
+    test_alu();
     printf("%d checks, %d failed\n", checks, failures);
     return failures ? 1 : 0;
 }
