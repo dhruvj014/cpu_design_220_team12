@@ -29,7 +29,8 @@ symbols:
 	$(CC) $(CFLAGS) -fno-stack-protector $(SRCS) -o cpu
 	nm -u cpu
 	@echo "--- core objects (only names the core itself defines may appear) ---"
-	$(if $(wildcard src/memory.o src/alu.o src/cpu.o),nm -u $(wildcard src/memory.o src/alu.o src/cpu.o),@echo "(core not written yet)")
+	for f in memory alu cpu; do $(CC) $(CFLAGS) -fno-stack-protector -c src/$$f.c -o src/$$f.o; done
+	nm -u src/memory.o src/alu.o src/cpu.o
 
 # Save the full traces of pow and fact for the submission
 traces: cpu
