@@ -13,6 +13,7 @@
 7. Do not change a header after Phase 1 without asking. Teammates build against them.
 8. Keep the code simple and readable: short functions, clear names, no clever macros. Dhruv must be able to explain every line.
 9. Do not commit or push unless Dhruv asks.
+10. Commit messages start with the phase, e.g. `Phase 2: add util.c and memory.c with tests`. One commit per phase.
 
 ## Your files
 

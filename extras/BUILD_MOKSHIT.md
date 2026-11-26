@@ -10,6 +10,7 @@
 5. Never change an expected value to make a test pass. Report the mismatch.
 6. Support only the C subset in SPEC section 8. Do not add features. Mokshit must be able to explain every line.
    Do not commit or push unless he asks.
+7. Commit messages start with the phase, e.g. `Phase 2: add compiler tokenizer and parser`. One commit per phase.
 
 ## Your files
 
