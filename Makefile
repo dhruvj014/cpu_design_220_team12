@@ -19,12 +19,14 @@ cpu: $(OBJS)
 src/%.o: src/%.c $(wildcard include/*.h programs/*.h)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Build and run every unit test. Teammates add test_compiler, test_stack here.
+# Build and run every unit test. test_asm also checks the disassembler (got|want pairs compared by awk).
+# Teammates add test_compiler, test_stack here.
 test:
 	$(CC) $(CFLAGS) tests/test_core.c $(CORE) -o test_core
 	./test_core
 	$(CC) $(CFLAGS) tests/test_asm.c $(CORE) src/assembler.c src/disasm.c -o test_asm
 	./test_asm
+	./test_asm disasm | awk -F'|' '$$1 != $$2 { print "FAIL: disasm " $$0; bad = 1 } END { if (bad || NR == 0) exit 1; print NR " disasm words, 0 failed" }'
 
 # Show which library functions the program and the core objects call
 symbols:

@@ -1,6 +1,12 @@
-/* test_asm.c - Unit tests for the assembler. Owner: Tanisha */
+/* test_asm.c - Unit tests for the assembler and disassembler. Owner: Tanisha
+
+   ./test_asm         assembler checks, prints "N checks, M failed"
+   ./test_asm disasm  prints "got|want" for every disassembled word; the Makefile compares the two halves
+                      (disasm_print writes to stdout, and without library calls the test cannot capture it) */
 #include <stdio.h>
 #include "assembler.h"
+#include "disasm.h"
+#include "util.h"
 #include "cpu_layout.h"
 
 static const char *POW_ASM =
@@ -193,9 +199,40 @@ static void test_call_ret(void)
     expect(word_at(&m, 2) == 0x9000, "RET is 9000");
 }
 
-/* Runs all tests and returns 1 if any failed. */
-int main(void)
+/* Source forms from SPEC section 9, with labels written as addresses. */
+static const char *const POW_TEXT[11] = {
+    "LD R1, [R0+0x30]", "LD R2, [R0+0x32]", "LDI R3, 1", "ST R3, [R0+0x34]", "CMP R2, R0", "JZ 0x14",
+    "MUL R3, R3, R1", "ST R3, [R0+0x34]", "ADDI R2, R2, -1", "JMP 0x08", "HLT"
+};
+static const char *const FACT_TEXT[17] = {
+    "LDI R1, 2", "ST R1, [R0+0x34]", "LD R1, [R0+0x34]", "LD R2, [R0+0x30]", "CMP R2, R1", "JC 0x1C",
+    "LD R1, [R0+0x32]", "LD R2, [R0+0x34]", "MUL R1, R1, R2", "ST R1, [R0+0x32]", "LD R1, [R0+0x34]",
+    "ADDI R1, R1, 1", "ST R1, [R0+0x34]", "JMP 0x04", "LD R1, [R0+0x32]", "ST R1, [R0+0x36]", "HLT"
+};
+
+/* Extra words: CALL, RET, and words with reserved bits set (HLT, ADD, CMP, JMP, RET). */
+static const u16 EXTRA_WORDS[7] = { 0x800C, 0x9000, 0x0001, 0x4001, 0xB280, 0xC200, 0x9001 };
+static const char *const EXTRA_TEXT[7] = { "CALL 0x0C", "RET", "???", "???", "???", "???", "???" };
+
+/* Prints one "got|want" line per word. */
+static void print_pairs(const u16 *words, const char *const *text, int count)
 {
+    int i;
+    for (i = 0; i < count; i++) {
+        disasm_print(words[i]);
+        printf("|%s\n", text[i]);
+    }
+}
+
+/* Runs all tests and returns 1 if any failed. "disasm" prints the disassembly pairs instead. */
+int main(int argc, char **argv)
+{
+    if (argc == 2 && str_eq(argv[1], "disasm")) {
+        print_pairs(POW_WORDS, POW_TEXT, 11);
+        print_pairs(FACT_WORDS, FACT_TEXT, 17);
+        print_pairs(EXTRA_WORDS, EXTRA_TEXT, 7);
+        return 0;
+    }
     test_pow();
     test_fact();
     test_errors();
