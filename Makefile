@@ -19,10 +19,12 @@ cpu: $(OBJS)
 src/%.o: src/%.c $(wildcard include/*.h programs/*.h)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Build and run every unit test. Teammates add test_asm, test_compiler, test_stack here.
+# Build and run every unit test. Teammates add test_compiler, test_stack here.
 test:
 	$(CC) $(CFLAGS) tests/test_core.c $(CORE) -o test_core
 	./test_core
+	$(CC) $(CFLAGS) tests/test_asm.c $(CORE) src/assembler.c src/disasm.c -o test_asm
+	./test_asm
 
 # Show which library functions the program and the core objects call
 symbols:
