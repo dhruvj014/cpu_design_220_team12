@@ -21,7 +21,9 @@
        static const char *POW_ASM =
        #include "pow.inc"
        ;                                                                    */
-static const char *POW_ASM = 0;
+static const char *POW_ASM =
+#include "pow.inc"
+;
 
 /* Mokshit: replace the next line with
        static const char *FACT_C =
